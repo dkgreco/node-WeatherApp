@@ -1,6 +1,6 @@
 const
     request = require('request'),
-    key = require('../../configKeys/config').mapboxKey,
+    key = process.env.MAPBOX_API_KEY || require('../../configKeys/config').mapboxKey,
     geocode = (address, callback) => {
         const
             baseURI = "https://api.mapbox.com/geocoding/v5/mapbox.places/",
