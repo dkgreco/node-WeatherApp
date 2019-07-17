@@ -13,8 +13,6 @@ app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
-
-
 app.use(express.static(publicDirectoryPath));
 
 app.get('', (req, res) => {
@@ -43,11 +41,19 @@ app.get('/weather', (req, res) => {
    if (!req.query.address) {
        return res.send('You must provide an address');
    }
-   res.send({
-       location: 'Broomfield',
-       forecast: 'Rainy',
-       address: req.query.address
-   })
+    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
+        if (error) {
+            return res.send({
+                title: 'ERROR 404',
+                errMsg: 'Request Unable To Be Completed.',
+                author: 'Dustin K Greco'
+            });
+        }
+        fetchWeather(latitude, longitude, location,(error, forecastData) => {
+            if (error) { return res.send('DarkSky Call Error: ', error); }
+            res.send(forecastData);
+        });
+    });
 });
 
 app.get('/help/*', (req, res) => {

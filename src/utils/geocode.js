@@ -11,11 +11,11 @@ const
 
         request({url: url, json: true}, (error, response) => {
             if (error) {
-                callback('GeoCode API Unreachable.', undefined);
+                return callback('GeoCode API Unreachable.', undefined);
             } else if (response.body.message === 'Not Found') {
-                callback('Invalid URL Request Sent', undefined);
+                return callback('Invalid URL Request Sent', undefined);
             } else if (response.body.features.length === 0) {
-                callback('Location Not Found. Try another search...', undefined);
+                return callback('Location Not Found. Try another search...', undefined);
             }
             callback(undefined, {
                 latitude: response.body.features[0].center[1],
