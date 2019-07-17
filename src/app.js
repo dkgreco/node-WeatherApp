@@ -1,4 +1,5 @@
 const
+    PORT = process.env.PORT || 3000,
     path = require('path'),
     publicDirectoryPath = path.join(__dirname, '../public'),
     viewsPath = path.join(__dirname, '../hbsTemplates/views'),
@@ -72,6 +73,6 @@ app.get('*', (req, res) => {
    });
 });
 
-app.listen(3000, () => {
-    console.log('Server started on port 3000');
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 });
