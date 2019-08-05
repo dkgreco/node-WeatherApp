@@ -8,9 +8,7 @@ const
             url = baseURI.concat(key, '/', latitude, ',', longitude);
 
         request({url: url, json: true}, (error, response) => {
-            console.log(response);
             if (response.body.error || error) {
-                console.log(error);
                 error = response.body.error ? response.body.error : error;
                 return callback(error, undefined);
             }

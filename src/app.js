@@ -1,5 +1,5 @@
 const
-    PORT = process.env.PORT || 3000,
+    PORT = process.env.PORT || 3001,
     path = require('path'),
     publicDirectoryPath = path.join(__dirname, '../public'),
     viewsPath = path.join(__dirname, '../hbsTemplates/views'),
